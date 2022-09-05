@@ -1,7 +1,7 @@
-from django.urls import path, re_path
+from django.urls import url
 from .views import test
 
 urlpatterns = [
-    re_path(r'^$', test),
-    re_path('^<\d+>/$', test),
+    url(r'^$', test),
+    url(r'^<\d+>/$', test),
 ]
