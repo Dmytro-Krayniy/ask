@@ -1,3 +1,5 @@
+git clone --branch path https://github.com/Dmytro-Krayniy/ask.git /home/box/web/ask
+
 ﻿#sudo unlink /etc/nginx/sites-enabled/default
 #sudo ﻿ln -sf /home/box/web/ask/etc/nginx.conf /etc/nginx/sites-enabled/default
 sudo ﻿ln -sf /home/mit/PycharmProjects/ask/etc/nginx.conf /etc/nginx/sites-enabled/default

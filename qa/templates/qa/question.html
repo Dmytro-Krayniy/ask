@@ -1,0 +1,15 @@
+{% extends 'qa/base.html' %}
+
+{% block content %}
+<p>Title: {{ question.title }}</p>
+<h3>{{ question.text }}</h3>
+<p>Author: {{ question.author}} &nbsp;&nbsp;
+    Created: {{ question.added_at }} &nbsp;&nbsp;
+    Rating: {{ question.rating }}</p>
+{% for a in answers %}
+    <div class="container border border-primary">
+        <h4>{{ a }}</h4>
+        <p>Author: {{ a.author }} </p>
+    </div>
+{% endfor %}
+{% endblock %}

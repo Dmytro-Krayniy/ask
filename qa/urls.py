@@ -1,7 +1,11 @@
 from django.urls import path, re_path
-from .views import test
+from .views import *
 
 urlpatterns = [
-    re_path(r'', test),
-    re_path('^<\d+>/$', test),
+    path('new/', new),
+    path('', new, name='home'),
+    path('<int:q_id>/', question_info),
+    path('scrap/', scrap),
+    path('popular/', popular)
 ]
+

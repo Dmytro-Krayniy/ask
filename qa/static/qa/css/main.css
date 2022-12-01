@@ -1,0 +1,41 @@
+html {
+    font-size: 16px;
+    height: 100%;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000;
+    background-color: #fff;
+    min-width: 320px;
+    min-height: 100%;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+section {
+    padding: 50px, 0;
+}
+
+a {
+    color: #111;
+}
+
+a:hover {
+    color: #555;
+}
+
+#menu_vertical{
+    float: left;
+    height: 100%;
+    width: 150px;
+    position: fixed;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding: 20px;
+    border-right: 1px solid lightgrey;
+}

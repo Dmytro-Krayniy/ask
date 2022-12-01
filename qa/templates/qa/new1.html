@@ -1,0 +1,11 @@
+{% extends 'qa/base.html' %}
+
+{% block content %}
+<h2>List of recent questions.</h2>
+{% for q, a in questions %}
+    <div class="container border border-primary">
+        <h3>#{{ forloop.counter }} : {{ q }}</h3> <br>
+        <h4>Answer: {{ a }}</h4>
+    </div>
+{% endfor %}
+{% endblock %}

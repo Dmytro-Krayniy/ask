@@ -1,0 +1,11 @@
+{% extends 'qa/base.html' %}
+
+{% block content %}
+<h2>{{ title }}</h2>
+{% for q in questions %}
+    <div class="container border border-primary">
+        <h4>{{ q }}</h4>
+        <a class="text-end" href="/question/{{ q.pk }}">Detail info...</a>
+    </div>
+{% endfor %}
+{% endblock %}

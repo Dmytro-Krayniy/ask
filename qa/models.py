@@ -4,7 +4,8 @@ from django.contrib.auth.models import User
 
 class QuestionManager(models.Manager):
     def new(self):
-        return super().get_queryset().order_by('-added_at').limit(10)
+        qts = super().get_queryset().order_by('-added_at')
+        return qts
 
     def popular(self):
         return super().get_queryset().order_by('-rating')
@@ -17,7 +18,8 @@ class Question(models.Model):
     rating = models.IntegerField(default=0)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     likes = models.ManyToManyField(User, related_name='likes_set')
-    questions = QuestionManager()
+    # questions = QuestionManager()
+    objects = QuestionManager()
 
     def __str__(self):
         return self.title
@@ -29,3 +31,5 @@ class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return str(self.text)
