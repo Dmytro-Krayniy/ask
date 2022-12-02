@@ -9,7 +9,7 @@ def test(request, *args, **kwargs):
 
 
 def page_not_found_view(request, exception):
-    return render(request, 'qa/404.html', status=404)
+    return render(request, 'qa/404.html', status=200)
 
 
 def popular(request, *args, **kwargs):
@@ -20,6 +20,7 @@ def popular(request, *args, **kwargs):
         'page_obj': page_obj,
         'title': 'List of popular questions',
     })
+
 
 def question_info(request, q_id):
     try:
