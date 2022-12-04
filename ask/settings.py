@@ -80,8 +80,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         # 'NAME': str(BASE_DIR / 'stepic_web'),
         'NAME': 'stepic_web',
-        'user': 'mit',
-        # 'user': 'root',
+        # 'user': 'mit',
+        'user': 'box',
     }
 }
 
