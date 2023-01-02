@@ -5,7 +5,7 @@
 {% for q in questions %}
     <div class="container border border-primary">
         <h4>{{ q }}</h4>
-        <a class="text-end" href="/question/{{ q.pk }}">Detail info...</a>
+        <a class="text-end" href="{{ q.get_url }}">Detail info...</a>
     </div>
 {% endfor %}
 {% endblock %}

@@ -12,4 +12,14 @@
         <p>Author: {{ a.author }} </p>
     </div>
 {% endfor %}
+<p></p>
+<h2>Add your answer:</h2>
+<form action="/question/{{ question.id }}/" class="form-horizontal" method="post">
+    {% csrf_token %}
+    <p>{{ form.text }}</p>
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+</form>
+
 {% endblock %}

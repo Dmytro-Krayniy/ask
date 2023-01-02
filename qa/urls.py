@@ -6,6 +6,7 @@ urlpatterns = [
     path('', new, name='home'),
     path('<int:q_id>/', question_info),
     path('scrap/', scrap),
-    path('popular/', popular)
+    path('popular/', popular),
+    path('ask/', ask)
 ]
 

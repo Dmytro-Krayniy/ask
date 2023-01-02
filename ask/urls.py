@@ -15,13 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from qa.views import page_not_found_view
+from qa.views import page_not_found_view, ask
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('question/', include('qa.urls')),
     path('', include('qa.urls')),
+    path('ask/', ask)
 ]
 
 handler404 = page_not_found_view

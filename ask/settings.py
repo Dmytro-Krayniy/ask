@@ -23,7 +23,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 SECRET_KEY = 'django-insecure-s!mx8i0=j06oez8y3ocgz@37f(km2+ykh+t&eug%ikkw2ja%i+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 

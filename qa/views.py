@@ -1,11 +1,25 @@
-from django.http import HttpResponse, HttpResponseNotFound, Http404
+from django.contrib import messages
+from django.http import HttpResponse, Http404
 from qa.models import Question, Answer
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
+from .forms import AskForm, AnswerForm
 
 
 def test(request, *args, **kwargs):
     return HttpResponse('OK')
+
+
+def ask(request):
+    if request.method == 'POST':
+        form = AskForm(request.POST)
+        if form.is_valid():
+            question = form.save()
+            url = question.get_url()
+            return redirect(url)
+    else:
+        form = AskForm()
+    return render(request, 'qa/ask.html', {'form': form})
 
 
 def page_not_found_view(request, exception):
@@ -27,17 +41,27 @@ def question_info(request, q_id):
         q = int(q_id)
     except TypeError:
         raise Http404()
-    # if q < 0 or q > Question.objects.count():
     try:
-        question = Question.objects.filter(pk=q_id)[0]
+        question = Question.objects.get(pk=q)
     except IndexError:
-        # question = Question.objects.first().pk
-        # return redirect(f'/question/{question}')
         raise Http404()
-    answers = Answer.objects.order_by('-added_at').filter(question=question)
+
+    if request.method == 'POST':
+        form = AnswerForm(request.POST)
+        if form.is_valid():
+            answer = form.save()
+            answer.author = request.user
+            answer.question = question
+            answer.save()
+            messages.success(request, 'Answer added successfully. Redirected to {request.path}')
+            return redirect(request.path)
+    else:
+        answers = Answer.objects.filter(question=question).order_by('-added_at')
+        form = AnswerForm()
     return render(request, 'qa/question.html', {
         'question': question,
         'answers': answers,
+        'form': form,
     })
 
 
