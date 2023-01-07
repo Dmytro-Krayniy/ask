@@ -108,6 +108,20 @@
     </nav>
     {% endif %}
     <!--End of paginator-->
+
+    <!-- Messages block -->
+    {% if messages %}
+    <div class="container messages justify-content-center">
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" role="alert">
+          {{ message|safe }}
+          <a class="close" href="#">✖</a>
+        </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    <!-- End of Messages block -->
+
   </div>
 <!-- End of content block -->
 </div>

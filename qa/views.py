@@ -47,17 +47,14 @@ def question_info(request, q_id):
         raise Http404()
 
     if request.method == 'POST':
-        form = AnswerForm(request.POST)
+        form = AnswerForm(request.POST, question=question)
         if form.is_valid():
             answer = form.save()
-            answer.author = request.user
-            answer.question = question
-            answer.save()
-            messages.success(request, 'Answer added successfully. Redirected to {request.path}')
+            messages.success(request, f'Answer added successfully. Redirected to {request.path}')
             return redirect(request.path)
     else:
-        answers = Answer.objects.filter(question=question).order_by('-added_at')
-        form = AnswerForm()
+        form = AnswerForm(question=question)
+    answers = Answer.objects.filter(question=question).order_by('-added_at')
     return render(request, 'qa/question.html', {
         'question': question,
         'answers': answers,
