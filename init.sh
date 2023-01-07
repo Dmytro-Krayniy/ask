@@ -12,7 +12,7 @@ sudo gunicorn -w 3 -c /home/mit/PycharmProjects/ask/etc/gunicorn-django.conf.py 
 
 sudo /etc/init.d/gunicorn restart
 
-sudo /etc/init.d/mysql start﻿
+sudo /etc/init.d/mysql restart﻿
 mysql -uroot -e "create database stepic_web;"
 mysql -uroot -e "grant all privileges on stepic_web.* to 'box'@'localhost' with grant option;"
 ~/web/ask/manage.py makemigrations
@@ -45,6 +45,18 @@ sudo python3 -m pip install mysqlclient
 
 python3 manage.py runserver 0.0.0.0:8000
 
+This should kill all the processes associated with port 8000(Do not use Ctrl+Z):
+sudo fuser -k 8000/tcp
+
 Чтобы начать пользоваться виртуальным окружением, необходимо его активировать:
 source venv/bin/activate
+
+
+
+w3m - текстовый браузер, сначала ставим его, 
+
+sudo apt-get install w3m
+потом запускаем w3m 0.0.0.0:80 и смотрим что нам выдает джанго, обычно понятные исключения
+так же netstat -tlnp - показывает какие порты кто слушает в данный момент..
+
 
