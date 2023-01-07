@@ -22,9 +22,9 @@ class AnswerForm(forms.Form):
     text = forms.CharField(min_length=2, widget=forms.Textarea(attrs={'rows': 3, 'cols': 80}))
     question = forms.ModelChoiceField(queryset=Question.objects, to_field_name='title')
 
-    def __init__(self, *args, question=Question.objects.filter(pk=1), **kwargs):
+    def __init__(self, *args, **kwargs):  #(self, *args, question=Question.objects.filter(pk=1), **kwargs)
         super().__init__(*args, **kwargs)
-        self.fields['question'].initial = question
+        #self.fields['question'].initial = question
 
     def clean(self):
         st = self.cleaned_data['text']
