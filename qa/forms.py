@@ -13,7 +13,7 @@ class AskForm(forms.Form):
         return self.cleaned_data
 
     def save(self, commit=True):
-        question = Question(**self.cleaned_data, author=User.objects.get(pk=1))
+        question = Question(author=User.objects.get(pk=1), **self.cleaned_data)
         question.save()
         return question
 
@@ -22,7 +22,7 @@ class AnswerForm(forms.Form):
     text = forms.CharField(min_length=2, widget=forms.Textarea(attrs={'rows': 3, 'cols': 80}))
     question = forms.ModelChoiceField(queryset=Question.objects, to_field_name='title')
 
-    def __init__(self, *args, question, **kwargs):
+    def __init__(self, *args, question=Question.objects.filter(pk=1), **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['question'].initial = question
 

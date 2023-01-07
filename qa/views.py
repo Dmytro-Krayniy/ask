@@ -50,7 +50,7 @@ def question_info(request, q_id):
         form = AnswerForm(request.POST, question=question)
         if form.is_valid():
             answer = form.save()
-            messages.success(request, f'Answer added successfully. Redirected to {request.path}')
+            messages.success(request, 'Answer added successfully.')
             return redirect(request.path)
     else:
         form = AnswerForm(question=question)
