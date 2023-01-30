@@ -1,5 +1,38 @@
 from django import forms
 from .models import Question, Answer, User
+from django.core.exceptions import ValidationError
+
+
+class LoginForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('username', 'password')
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-input'}),
+            'password': forms.PasswordInput(attrs={'class': 'form-input'}),
+        }
+
+    def clean(self):
+        if not User.objects.filter(self.cleaned_data['username']).exists():
+            raise ValidationError('Login error: Incorrect Username or Password.')
+        return self.cleaned_data
+
+
+class SignupForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password')
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-input'}),
+            'password': forms.PasswordInput(attrs={'class': 'form-input'}),
+            'email': forms.EmailInput(attrs={'class': 'form-input'})
+        }
+
+    def save(self):
+        user = User(**self.cleaned_data)
+        user.set_password(self.cleaned_data['password'])
+        user.save()
+        return user
 
 
 class AskForm(forms.Form):
@@ -13,7 +46,7 @@ class AskForm(forms.Form):
         return self.cleaned_data
 
     def save(self, commit=True):
-        question = Question(author=User.objects.get(pk=1), **self.cleaned_data)
+        question = Question(author=self._user, **self.cleaned_data)
         question.save()
         return question
 
@@ -34,7 +67,7 @@ class AnswerForm(forms.Form):
 
     def save(self, commit=True):
         answer = Answer(**self.cleaned_data)
-        answer.author = User.objects.get(pk=1)
+        answer.author = self._user
         answer.save()
         return answer
 

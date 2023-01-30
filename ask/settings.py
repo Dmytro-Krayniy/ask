@@ -1,5 +1,3 @@
-# This should kill all the processes associated with port 8000
-# sudo fuser -k 8000/tcp
 """
 Django settings for ask project.
 
@@ -40,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'qa',
+    'qa.apps.QaConfig',
 ]
 
 MIDDLEWARE = [
@@ -106,6 +104,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# added because didn't work function authenticate
+# AUTHENTICATION_BACKENDS = (
+#     "django.contrib.auth.backends.ModelBackend",
+# )
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/

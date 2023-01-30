@@ -13,7 +13,7 @@
 <!--Main menu-->
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">ASK overflow</a>
+    <a class="navbar-brand" href="{% url 'home' %}">ASK overflow</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -23,16 +23,17 @@
           <a class="nav-link active" aria-current="page" href="#">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/question">Questions</a>
+          <a class="nav-link" href="{% url 'home' %}">Questions</a>
         </li>
         <li class="nav-item">
           <a class="nav-link disabled">For teams</a>
         </li>
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      <div class="nav-item d-flex">
+        <p>{{ request.user }}</p>
+        <a class="nav-link" href="{% url 'signup' %}">Sign up  </a>  |  <a class="nav-link"
+            href="{% url 'login' %}">   Log in</a>
+      </div>
     </div>
   </div>
 </nav>
@@ -43,25 +44,25 @@
   <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
       <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-          <a href="/new" class="nav-link" aria-current="page">
+          <a href="{% url 'new' %}" class="nav-link" aria-current="page">
             <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
             Recent questions
           </a>
         </li>
         <li>
-          <a href="/popular" class="nav-link link-dark">
+          <a href="{% url 'popular' %}" class="nav-link link-dark">
             <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
             Popular
           </a>
         </li>
         <li>
-          <a href="/question/1" class="nav-link link-dark">
+          <a href="{% url 'question_details' q_id=1 %}" class="nav-link link-dark">
             <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
             Question details
           </a>
         </li>
         <li>
-          <a href="/question/ask" class="nav-link link-dark">
+          <a href="{% url 'ask' %}" class="nav-link link-dark">
             <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
             Ask new question
           </a>

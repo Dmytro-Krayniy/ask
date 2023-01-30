@@ -2,7 +2,7 @@
 
 {% block content %}
     <h2>Ask new question</h2>
-    <form class="form-horizontal" method="post" action="/question/ask/">
+    <form class="form-horizontal" method="post" action="ask">
         {% csrf_token %}
         {{ form.as_p }}
         <div class="form-actions">

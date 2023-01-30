@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 class QuestionManager(models.Manager):
@@ -18,14 +19,18 @@ class Question(models.Model):
     rating = models.IntegerField(default=0)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     likes = models.ManyToManyField(User, related_name='likes_set')
-    # questions = QuestionManager()
     objects = QuestionManager()
 
     def __str__(self):
         return self.title
 
-    def get_url(self):
-        return '/question/' + str(self.id)
+    def get_absolute_url(self):
+        return reverse('question_details', kwargs={'q_id': self.pk})
+
+    class Meta:
+        verbose_name = 'Вопрос'
+        verbose_name_plural = 'Вопросы'
+        ordering = ['-added_at', 'title']
 
 
 class Answer(models.Model):
@@ -36,3 +41,8 @@ class Answer(models.Model):
 
     def __str__(self):
         return str(self.text)
+
+    class Meta:
+        verbose_name = 'Ответ'
+        verbose_name_plural = 'Ответы'
+        ordering = ['-added_at', 'text']

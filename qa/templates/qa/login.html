@@ -1,0 +1,15 @@
+{% extends 'qa/base.html' %}
+
+{% block content %}
+<h2>Login form</h2>
+<form action="/login/" class="form-horizontal" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {% for err in errors %}
+        <p>{{ err }}</p>
+    {% endfor %}
+    <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+</form>
+{% endblock %}
