@@ -103,14 +103,16 @@ def question_details(request, q_id=1):
         raise Http404()
 
     if request.method == 'POST':
-        form = AnswerForm(request.POST, question=question)
+#        form = AnswerForm(request.POST, question=question)
+        form = AnswerForm(request.POST)
         if form.is_valid():
             form._user = request.user
             answer = form.save()
             messages.success(request, 'Answer added successfully.')
             return redirect(request.path)
     else:
-        form = AnswerForm(question=question)
+        form = AnswerForm()
+#        form = AnswerForm(question=question)
     answers = Answer.objects.filter(question=question).order_by('-added_at')
     return render(request, 'qa/question.html', {
         'question': question,
