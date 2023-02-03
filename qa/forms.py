@@ -13,8 +13,6 @@ class LoginForm(forms.ModelForm):
         }
 
     def clean(self):
-        if not User.objects.filter(self.cleaned_data['username']).exists():
-            raise ValidationError('Login error: Incorrect Username or Password.')
         return self.cleaned_data
 
 
@@ -32,6 +30,7 @@ class SignupForm(forms.ModelForm):
         user = User(**self.cleaned_data)
         user.set_password(self.cleaned_data['password'])
         user.save()
+        #self.save_m2m()  # execute only if model has relations many-to-many
         return user
 
 

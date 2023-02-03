@@ -19,7 +19,7 @@ def do_login(request):
     errors = []
     if request.method == 'POST':
         form = LoginForm(request.POST)
-        if form.is_valid:
+        if form.is_valid():
             username = form.cleaned_data['username']
             password = request.POST['password']
             user = authenticate(username=username, password=password)
@@ -33,7 +33,7 @@ def do_login(request):
                                     )
                 return response
             else:
-                errors.append('Error: User or password is incorrect')
+                errors.append('Login error: incorrect Username or password.')
     else:
         form = LoginForm()
     return render(request, 'qa/login.html', context={'form': form, 'errors': errors})
