@@ -14,7 +14,7 @@
 {% endfor %}
 <p></p>
 <h2>Add your answer:</h2>
-<form action="{{ question.get_url }}/" class="form-horizontal" method="post">
+<form action="{{ question.get_absolute_url }}" class="form-horizontal" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     {% for err in form.non_field_errors %}

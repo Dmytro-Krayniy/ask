@@ -64,7 +64,7 @@ def signup(request):
     return render(request, 'qa/signup.html', context={'form': form, 'errors': errors})
 
 
-@login_required
+#@login_required
 def ask(request):
     if request.method == 'POST':
         form = AskForm(request.POST)
@@ -107,6 +107,7 @@ def question_details(request, q_id=1):
         form = AnswerForm(request.POST)
         if form.is_valid():
             form._user = request.user
+            form._question = question
             answer = form.save()
             messages.success(request, 'Answer added successfully.')
             return redirect(request.path)
