@@ -23,6 +23,7 @@ urlpatterns = [
     path('question/', include('qa.urls')),
     path('signup/', signup, name='signup'),
     path('login/', do_login, name='login'),
+    path('logout/', user_logout, name='logout'),
     path('<int:q_id>/', question_details, name='question_details'),
     path('', include('qa.urls')),
     path('ask/', ask)  # delete this after completing course on stepik.org

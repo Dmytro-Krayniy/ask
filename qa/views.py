@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, get_user
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse, Http404
@@ -14,6 +14,10 @@ from .forms import *
 def test(request, *args, **kwargs):
     return HttpResponse('OK')
 
+
+def user_logout(request):
+    logout(request)
+    return redirect('login')
 
 def do_login(request):
     errors = []
@@ -103,6 +107,7 @@ def question_details(request, q_id=1):
         raise Http404()
 
     if request.method == 'POST':
+        print(request)
 #        form = AnswerForm(request.POST, question=question)
         form = AnswerForm(request.POST)
         if form.is_valid():
@@ -110,7 +115,7 @@ def question_details(request, q_id=1):
             form._question = question
             answer = form.save()
             messages.success(request, 'Answer added successfully.')
-            return redirect(request.path)
+            return redirect(question.get_absolute_url())
     else:
         form = AnswerForm()
 #        form = AnswerForm(question=question)

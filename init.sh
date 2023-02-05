@@ -23,8 +23,4 @@ sudo gunicorn -c /home/box/web/ask/etc/gunicorn-django.conf.py ask.wsgi:applicat
 
 
 
-Failed test #4. POST to /1/ didn't redirected to question page
-
-
-
 

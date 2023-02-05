@@ -55,9 +55,9 @@ class AnswerForm(forms.Form):
 #    question = forms.ModelChoiceField(queryset=Question.objects, to_field_name='title')
 
     def clean(self):
-        st = self.cleaned_data['text']
-        if len(st.strip()) < 3:
-            raise forms.ValidationError('Answer is incorrect. Answers minimum length should be 3 characters')
+        # st = self.cleaned_data['text']
+        # if len(st.strip()) < 3:
+        #     raise forms.ValidationError('Answer is incorrect. Answers minimum length should be 3 characters')
         return self.cleaned_data
 
     def save(self, commit=True):
