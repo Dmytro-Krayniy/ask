@@ -107,7 +107,6 @@ def question_details(request, q_id=1):
         raise Http404()
 
     if request.method == 'POST':
-        print(request)
 #        form = AnswerForm(request.POST, question=question)
         form = AnswerForm(request.POST)
         if form.is_valid():
