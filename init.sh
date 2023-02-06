@@ -5,7 +5,7 @@ sudo ln -sf /home/box/web/ask/etc/nginx.conf /etc/nginx/sites-enabled/default
 #sudo ﻿ln -sf /home/mit/PycharmProjects/ask/etc/nginx.conf /etc/nginx/sites-enabled/default
 sudo /etc/init.d/nginx restart
 
-sudo /etc/init.d/mysql start﻿
+sudo /etc/init.d/mysql restart﻿
 mysql -uroot -e "create database stepic_web;"
 mysql -uroot -e "grant all privileges on stepic_web.* to 'box'@'localhost' with grant option;"
 
@@ -22,5 +22,6 @@ sudo gunicorn -c /home/box/web/ask/etc/gunicorn-django.conf.py ask.wsgi:applicat
 # остановить полностью все workers of gunicorn sudo pkill -f gunicorn
 
 
-
+curl -X POST https://0.0.0.0:8000/1/ -d {'csrfmiddlewaretoken': ['5B6WcWyPCzsncsBOo0FG      
+1G8eVv9qhmC3DIDngNyvAuhYJyMu6pHFuRL9t0U6Ukz'], 'text': ['dfd']}
 

@@ -25,7 +25,8 @@ class Question(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('question_details', kwargs={'q_id': self.pk})
+        # return reverse('question_details', kwargs={'q_id': self.pk})
+        return '/question/{}/'.format(self.pk)
 
     class Meta:
         verbose_name = 'Вопрос'

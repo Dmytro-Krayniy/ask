@@ -100,7 +100,7 @@ def popular(request, *args, **kwargs):
 
 
 def question_details(request, q_id=1):
-    logger.info(f'question #{q_id} - request from{request.path} - request{request}')
+    logger.info('question #{} - request from{} - request{}'.format(q_id, request.path, request))
     try:
         q = int(q_id)
     except TypeError:
@@ -112,15 +112,16 @@ def question_details(request, q_id=1):
 
     if request.method == 'POST':
 #        form = AnswerForm(request.POST, question=question)
-        logger.debug(f'POST with parameters: {request.POST}')
+        logger.debug('POST with parameters: {}'.format(request.POST))
         form = AnswerForm(request.POST)
         if form.is_valid():
             form._user = request.user
             form._question = question
             answer = form.save()
-            logger.debug(f'Added answer: {answer.question}-{answer.text}-{answer.author}-{answer.pk}')
+            logger.debug('Added answer: {}-{}-{}-{}'
+                         .format(answer.question, answer.text, answer.author, answer.pk))
             messages.success(request, 'Answer added successfully.')
-            logger.debug(f'Redirect to {question.get_absolute_url()}')
+            logger.debug('Redirect to {}'.format(question.get_absolute_url()))
             return redirect(question.get_absolute_url())
     else:
         form = AnswerForm()
