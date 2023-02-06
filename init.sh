@@ -5,7 +5,7 @@ sudo ln -sf /home/box/web/ask/etc/nginx.conf /etc/nginx/sites-enabled/default
 #sudo ﻿ln -sf /home/mit/PycharmProjects/ask/etc/nginx.conf /etc/nginx/sites-enabled/default
 sudo /etc/init.d/nginx restart
 
-sudo /etc/init.d/mysql restart﻿
+sudo /etc/init.d/mysql start﻿
 mysql -uroot -e "create database stepic_web;"
 mysql -uroot -e "grant all privileges on stepic_web.* to 'box'@'localhost' with grant option;"
 

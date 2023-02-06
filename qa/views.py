@@ -9,6 +9,9 @@ from qa.models import *
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
 from .forms import *
+import logging
+
+logger = logging.getLogger('my_logger')
 
 
 def test(request, *args, **kwargs):
@@ -97,6 +100,7 @@ def popular(request, *args, **kwargs):
 
 
 def question_details(request, q_id=1):
+    logger.info(f'question #{q_id} - request from{request.path} - request{request}')
     try:
         q = int(q_id)
     except TypeError:
@@ -108,12 +112,15 @@ def question_details(request, q_id=1):
 
     if request.method == 'POST':
 #        form = AnswerForm(request.POST, question=question)
+        logger.debug(f'POST with parameters: {request.POST}')
         form = AnswerForm(request.POST)
         if form.is_valid():
             form._user = request.user
             form._question = question
             answer = form.save()
+            logger.debug(f'Added answer: {answer.question}-{answer.text}-{answer.author}-{answer.pk}')
             messages.success(request, 'Answer added successfully.')
+            logger.debug(f'Redirect to {question.get_absolute_url()}')
             return redirect(question.get_absolute_url())
     else:
         form = AnswerForm()

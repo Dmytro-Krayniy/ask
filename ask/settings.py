@@ -104,10 +104,31 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# added because didn't work function authenticate
-# AUTHENTICATION_BACKENDS = (
-#     "django.contrib.auth.backends.ModelBackend",
-# )
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'main_format': {
+            'format': '{asctime} : {levelname} : {module} : {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'ask.log',
+            'formatter': 'main_format',
+        },
+    },
+    'loggers': {
+        'my_logger': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
